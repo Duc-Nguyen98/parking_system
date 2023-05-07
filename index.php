@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    //Connect to database and create table
+    // Database connection details
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -19,16 +19,49 @@
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
+
+    // Check connection and show error message if failed
     if ($conn->connect_error) {
         die("Database Connection failed: " . $conn->connect_error);
         "<a href='install.php'>If first time running click here to install database</a>";
     }
 
-    //? Handle:Execute SQL query View data Begin
+    // Execute SQL query to retrieve data from the database
     $sql = "SELECT * FROM main_table ORDER BY id ASC";
     $result = mysqli_query($conn, $sql);
-    //? Handle: Display query result End
+
+    // Display the query result
+
+
+    //! function handle getParkArenaStatus - Check Status Parking
+    function getParkArenaStatus($parkArenaCode)
+    {
+        switch ($parkArenaCode) {
+            case "0":
+                return array("parkArena" => "A1", "classArena" => "badge badge-primary text-uppercase");
+            case "1":
+                return array("parkArena" => "B1", "classArena" => "badge badge-dark text-uppercase");
+            default:
+                return array("parkArena" => "", "classArena" => "");
+        }
+    }
+
+    //! function handle getStatusInfo - Check Status Parking
+
+    function getStatusInfo($statusCode)
+    {
+        switch ($statusCode) {
+            case "0":
+                return array("status" => "Available", "classStatus" => "badge badge-success");
+            case "1":
+                return array("status" => "Processing", "classStatus" => "badge badge-danger");
+            case "2":
+                return array("status" => "Booked", "classStatus" => "badge badge-warning text-white");
+            default:
+                return array("status" => "", "classStatus" => "");
+        }
+    }
+
     ?>
     <div class="container">
         <div class="row">
@@ -73,7 +106,6 @@
 
             <div class="col-12 my-2">
                 <div class="tab-content">
-
                     <table class="table table-responsive">
                         <?php
                         if (mysqli_num_rows($result) > 0) {
@@ -113,48 +145,17 @@
                             <?php
                             $idNumber = 0;
                             while ($row = mysqli_fetch_assoc($result)) {
-                                //?Handle: Check Status Parking Begin
                                 $idNumber++;
-                                $rParkArena = "";
-                                $rClassArena = "";
-                                switch ($row["cParkArena"]) {
-                                    case "0":
-                                        $rParkArena = "A1";
-                                        $rClassArena = "badge badge-primary text-uppercase";
-
-                                        break;
-                                    case "1":
-                                        $rParkArena = "B1";
-                                        $rClassArena = "badge badge-dark text-uppercase";
-
-                                        break;
-                                }
-
-                                //?Handle:  Check Status Parking End
-
-                                //?Handle: Check Status Parking Begin
-
-                                $rStatus = "";
-                                $rClassStatus = "";
-                                switch ($row["cStatus"]) {
-                                    case "0":
-                                        $rStatus = "Available";
-                                        $rClassStatus = "badge badge-success ";
-                                        break;
-                                    case "1":
-                                        $rStatus = "Processing";
-                                        $rClassStatus = "badge badge-danger ";
-                                        break;
-                                    case "2":
-                                        $rStatus = "Booked";
-                                        $rClassStatus = "badge badge-warning  text-white";
-                                        break;
-                                }
-
-                                //?Handle:  Check Status Parking End
+                                //! Variable getParkArenaStatus
+                                $parkArenaInfo = getParkArenaStatus($row["cParkArena"]);
+                                $rParkArena = $parkArenaInfo["parkArena"];
+                                $rClassArena = $parkArenaInfo["classArena"];
+                                //!  Variable getStatusInfo
+                                $statusInfo = getStatusInfo($row["cStatus"]);
+                                $rStatus = $statusInfo["status"];
+                                $rClassStatus = $statusInfo["classStatus"];
                             ?>
                                 <tbody>
-
                                     <tr>
                                         <td><?= $idNumber ?></td>
                                         <td><span class="<?= $rClassArena ?>">hmnu:<?= $rParkArena ?></span></td>
@@ -163,13 +164,10 @@
                                         <!-- <td><?= $row['cPlate'] ?></td> -->
                                         <td><?= $row['cTimeCheckIn'] ?></td>
                                         <td><?= $row['cTimeCheckOut'] ?></td>
-                                        <td><?=$rParkArena . '-' . 'P'. $row['cParkLocation'] ?></td>
+                                        <td><?= $rParkArena . '-' . 'P' . $row['cParkLocation'] ?></td>
                                         <td><span class="<?= $rClassStatus ?>"><?= $rStatus ?></span></td>
-
                                     </tr>
                                 </tbody>
-
-
                         <?php
                             }
                         } else {
@@ -180,14 +178,9 @@
                 </div>
             </div>
         </div>
-
-
-
-
         <?php
         mysqli_close($conn);
         ?>
-
 </body>
 
 </html>
