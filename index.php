@@ -31,70 +31,113 @@
     //? Handle: Display query result End
     ?>
 
-    <div class="tab-content">
+            <!-- //TODO: Option Display Slot Table View or Grid View Begin -->
+            <!-- <div class="col-12 my-2">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Table
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Grid
+                    </label>
+                </div>
+            </div> -->
+            <!-- //TODO: Option Display Slot Table View or Grid View End -->
 
-        <table class="table table-responsive">
-            <?php
-            if (mysqli_num_rows($result) > 0) {
-                echo "<thead>" .
-                    "<tr>" .
-                    "<th><p class='text-capitalize'>id</p></th>" .
-                    "<th><p class='text-capitalize'>cid</p></th>" .
-                    "<th><p class='text-capitalize'>cname</p></th>" .
-                    "<th><p class='text-capitalize'>cplate</p></th>" .
-                    "<th><p class='text-capitalize'>ctimecheckin</p></th>" .
-                    "<th><p class='text-capitalize'>ctimecheckout</p></th>" .
-                    "<th><p class='text-capitalize'>cparkarena</p></th>" .
-                    "<th><p class='text-capitalize'>cparklocation</p></th>" .
-                    "<th><p class='text-capitalize'>cstatus</p></th>" .
-                    "</tr>" .
-                    "</thead>";
+            <div class="col-12 my-2">
+                <div class="tab-content">
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    //?Handle: Check Status Parking Begin
+                    <table class="table table-responsive">
+                        <?php
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "<thead>" .
+                                "<tr>" .
+                                "<th><p class='text-capitalize'>id</p></th>" .
+                                "<th><p class='text-capitalize'>cid</p></th>" .
+                                "<th><p class='text-capitalize'>cname</p></th>" .
+                                "<th><p class='text-capitalize'>cplate</p></th>" .
+                                "<th><p class='text-capitalize'>ctimecheckin</p></th>" .
+                                "<th><p class='text-capitalize'>ctimecheckout</p></th>" .
+                                "<th><p class='text-capitalize'>cparkarena</p></th>" .
+                                "<th><p class='text-capitalize'>cparklocation</p></th>" .
+                                "<th><p class='text-capitalize'>cstatus</p></th>" .
+                                "</tr>" .
+                                "</thead>";
 
-                    $status = "";
-                    $class = "";
-                    switch ($row["cStatus"]) {
-                        case "0":
-                            $status = "Available";
-                            $class = "badge badge-success";
-                            break;
-                        case "1":
-                            $status = "Processing";
-                            $class = "badge badge-danger";
-                            break;
-                        case "2":
-                            $status = "Booked";
-                            $class = "badge badge-warning";
-                            break;
-                    }
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                //?Handle: Check Status Parking Begin
+                                $rParkArena = "";
+                                $rClassArena = "";
+                                switch ($row["cParkArena"]) {
+                                    case "0":
+                                        $rParkArena = "HNMU:A1";
+                                        $rClassArena = "badge badge-primary";
 
-                    //?Handle:  Check Status Parking End
-                    echo '
-        <tbody>
-            <tr>
-                <td>' . $row["id"] . '</td>
-                <td>' . $row["cId"] . '</td>
-                <td>' . $row["cName"] . '</td>
-                <td>' . $row["cPlate"] . '</td>
-                <td>' . $row["cTimeCheckIn"] . '</td>
-                <td>' . $row["cTimeCheckOut"] . '</td>
-                <td>' . $row["cParkArena"] . '</td>
-                <td>' . $row["cParkLocation"] . '</td>
-                <td><span class="' . $class . '">' . $status . '</span></td> 
-            </tr>
-        </tbody>';
-                }
-            } else {
-                echo "No results found.";
-            }
-            ?>
-        </table>
-    </div>
-    <?php
-    mysqli_close($conn);
-    ?>
+                                        break;
+                                    case "1":
+                                        $rParkArena = "HNMU:B1";
+                                        $rClassArena = "badge badge-dark";
+
+                                        break;
+                                }
+
+                                //?Handle:  Check Status Parking End
+
+                                //?Handle: Check Status Parking Begin
+
+                                $rStatus = "";
+                                $rClass = "";
+                                switch ($row["cStatus"]) {
+                                    case "0":
+                                        $rStatus = "Available";
+                                        $rClass = "badge badge-success";
+                                        break;
+                                    case "1":
+                                        $rStatus = "Processing";
+                                        $rClass = "badge badge-danger";
+                                        break;
+                                    case "2":
+                                        $rStatus = "Booked";
+                                        $rClass = "badge badge-warning text-white";
+                                        break;
+                                }
+
+                                //?Handle:  Check Status Parking End
+
+
+
+                                echo '
+                                    <tbody>
+                                    <tr>
+                                        <td>' . $row["id"] . '</td>
+                                        <td>' . $row["cId"] . '</td>
+                                        <td>' . $row["cName"] . '</td>
+                                        <td>' . $row["cPlate"] . '</td>
+                                        <td>' . $row["cTimeCheckIn"] . '</td>
+                                        <td>' . $row["cTimeCheckOut"] . '</td>
+                                        <td><span class="' . $rClassArena . '">' . $rParkArena . '</span></td> 
+
+
+                                        <td>' . $row["cParkLocation"] . '</td>
+                                        <td><span class="' . $rClass . '">' . $rStatus . '</span></td> 
+                                    </tr>
+                                    </tbody>';
+                            }
+                        } else {
+                            echo "No results found.";
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <?php
+        mysqli_close($conn);
+        ?>
 
 </body>
 
