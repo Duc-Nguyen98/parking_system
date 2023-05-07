@@ -50,10 +50,7 @@
                     "</thead>";
 
                 while ($row = mysqli_fetch_assoc($result)) {
-                    //! Handle check status parking
-                    $valueVirtual = $row["cStatus"];
 
-                    $result = $valueVirtual;
                     echo '
             <tbody>
                 <tr>
@@ -65,7 +62,6 @@
                     <td>' . $row["cTimecheckout"] . '</td>
                     <td>' . $row["cParkArena"] . '</td>
                     <td>' . $row["cParkLocation"] . '</td>
-                    <td><span class="badge badge-danger">' . $if() . '</span></td>
                     <!-- <td><span class="badge badge-danger">FULL</span></td> -->
                 </tr>
             </tbody>';
@@ -84,9 +80,6 @@
     <?php
     mysqli_close($conn);
     ?>
-
-
-
 
 </body>
 
