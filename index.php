@@ -25,24 +25,10 @@
         echo "<a href='install.php'>If first time running click here to install database</a>";
     }
 
-    //Execute SQL query
+    //? Handle:Execute SQL query View data Begin
     $sql = "SELECT * FROM main_table ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
-    //Display query result
-
-
-    // $status_array = array(
-    //     0 => array("Chưa có xe", "badge badge-success"),
-    //     1 => array("Đã có xe", "badge badge-danger"),
-    //     2 => array("Đã đặt lịch", "badge badge-warning")
-    // );
-
-    // $status_value = $row["cStatus"];
-    // $status_text = $status_array[$status_value][0];
-    // $status_class = $status_array[$status_value][1];
-
-    // echo '<td><span class="' . $status_class . '">' . $status_text . '</span></td>';
-
+    //? Handle: Display query result End
     ?>
 
 
