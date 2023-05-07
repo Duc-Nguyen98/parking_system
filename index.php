@@ -106,43 +106,34 @@
 
             <div class="col-12 my-2">
                 <div class="tab-content">
-                    <table class="table table-responsive">
+                    <table class="table table-responsive  table-hover  table-reflow table-bordered"">
                         <?php
                         if (mysqli_num_rows($result) > 0) {
                         ?>
-                            <thead>
-                                <tr>
+                            <thead class=" thead-dark">
+                        <tr class='text-capitalize my-0'>
 
-                                    <th>
-                                        <p class='text-capitalize'>STT</p>
-                                    </th>
-                                    <th>
-                                        <p class='text-capitalize'>Parking Area</p>
-                                    </th>
-                                    <!-- <th>
-                                        <p class='text-capitalize'>cid</p>
-                                    </th> -->
-                                    <!-- <th>
-                                        <p class='text-capitalize'>cname</p>
-                                    </th>
-                                    <th>
-                                        <p class='text-capitalize'>cplate</p>
-                                    </th> -->
-                                    <th>
-                                        <p class='text-capitalize'>Check-in time</p>
-                                    </th>
-                                    <th>
-                                        <p class='text-capitalize'>Check-out time</p>
-                                    </th>
-                                    <th>
-                                        <p class='text-capitalize'>SpotId</p>
-                                    </th>
-                                    <th>
-                                        <p class='text-capitalize'>Status</p>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <?php
+                            <th>
+                                <p class="my-0">#</p>
+                            </th>
+                            <th>
+                                <p class="my-0">Parking Area</p>
+                            </th>
+                            <th>
+                                <p class="my-0">Check-in time</p>
+                            </th>
+                            <th>
+                                <p class="my-0">Check-out time</p>
+                            </th>
+                            <th>
+                                <p class="my-0">SpotId</p>
+                            </th>
+                            <th>
+                                <p class="my-0">Status</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <?php
                             $idNumber = 0;
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $idNumber++;
@@ -154,26 +145,23 @@
                                 $statusInfo = getStatusInfo($row["cStatus"]);
                                 $rStatus = $statusInfo["status"];
                                 $rClassStatus = $statusInfo["classStatus"];
-                            ?>
-                                <tbody>
-                                    <tr>
-                                        <td><?= $idNumber ?></td>
-                                        <td><span class="<?= $rClassArena ?>">hmnu:<?= $rParkArena ?></span></td>
-                                        <!-- <td><span class="text-uppercase"><?= $row['cId'] ?></span></td> -->
-                                        <!-- <td><?= $row['cName'] ?></td> -->
-                                        <!-- <td><?= $row['cPlate'] ?></td> -->
-                                        <td><?= $row['cTimeCheckIn'] ?></td>
-                                        <td><?= $row['cTimeCheckOut'] ?></td>
-                                        <td><?= $rParkArena . '-' . 'P' . $row['cParkLocation'] ?></td>
-                                        <td><span class="<?= $rClassStatus ?>"><?= $rStatus ?></span></td>
-                                    </tr>
-                                </tbody>
-                        <?php
+                        ?>
+                            <tbody>
+                                <tr>
+                                    <td><?= $idNumber ?></td>
+                                    <td><span class="<?= $rClassArena ?>">hmnu:<?= $rParkArena ?></span></td>
+                                    <td><?= $row['cTimeCheckIn'] ?></td>
+                                    <td><?= $row['cTimeCheckOut'] ?></td>
+                                    <td><?= $rParkArena . '-' . 'P' . $row['cParkLocation'] ?></td>
+                                    <td><span class="<?= $rClassStatus ?>"><?= $rStatus ?></span></td>
+                                </tr>
+                            </tbody>
+                    <?php
                             }
                         } else {
                             echo "No results found.";
                         }
-                        ?>
+                    ?>
                     </table>
                 </div>
             </div>
