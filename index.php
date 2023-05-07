@@ -29,7 +29,22 @@
     $sql = "SELECT * FROM main_table ORDER BY id DESC";
     $result = mysqli_query($conn, $sql);
     //Display query result
+
+
+    // $status_array = array(
+    //     0 => array("Chưa có xe", "badge badge-success"),
+    //     1 => array("Đã có xe", "badge badge-danger"),
+    //     2 => array("Đã đặt lịch", "badge badge-warning")
+    // );
+
+    // $status_value = $row["cStatus"];
+    // $status_text = $status_array[$status_value][0];
+    // $status_class = $status_array[$status_value][1];
+
+    // echo '<td><span class="' . $status_class . '">' . $status_text . '</span></td>';
+
     ?>
+
 
     <div class="tab-content">
         <table class="table table-responsive">
@@ -50,21 +65,40 @@
                     "</thead>";
 
                 while ($row = mysqli_fetch_assoc($result)) {
+    //?Handle: Check Status Parking Begin
 
+                    $status = "";
+                    $class = "";
+                    switch ($row["cStatus"]) {
+                        case "0":
+                            $status = "Available";
+                            $class = "badge badge-success";
+                            break;
+                        case "1":
+                            $status = "Processing";
+                            $class = "badge badge-danger";
+                            break;
+                        case "2":
+                            $status = "Booked";
+                            $class = "badge badge-warning";
+                            break;
+                    }
+
+    //?Handle:  Check Status Parking End
                     echo '
-            <tbody>
-                <tr>
-                    <td>' . $row["id"] . '</td>
-                    <td>' . $row["cId"] . '</td>
-                    <td>' . $row["cName"] . '</td>
-                    <td>' . $row["cPlate"] . '</td>
-                    <td>' . $row["cTimecheckin"] . '</td>
-                    <td>' . $row["cTimecheckout"] . '</td>
-                    <td>' . $row["cParkArena"] . '</td>
-                    <td>' . $row["cParkLocation"] . '</td>
-                    <!-- <td><span class="badge badge-danger">FULL</span></td> -->
-                </tr>
-            </tbody>';
+        <tbody>
+            <tr>
+                <td>' . $row["id"] . '</td>
+                <td>' . $row["cId"] . '</td>
+                <td>' . $row["cName"] . '</td>
+                <td>' . $row["cPlate"] . '</td>
+                <td>' . $row["cTimeCheckIn"] . '</td>
+                <td>' . $row["cTimeCheckOut"] . '</td>
+                <td>' . $row["cParkArena"] . '</td>
+                <td>' . $row["cParkLocation"] . '</td>
+                <td><span class="' . $class . '">' . $status . '</span></td> 
+            </tr>
+        </tbody>';
                 }
             } else {
                 echo "No results found.";
