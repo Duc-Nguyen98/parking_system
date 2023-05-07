@@ -33,45 +33,45 @@
 
     <div class="tab-content">
 
-            <table class="table table-responsive">
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    echo "<thead>" .
-                        "<tr>" .
-                        "<th><p class='text-capitalize'>id</p></th>" .
-                        "<th><p class='text-capitalize'>cid</p></th>" .
-                        "<th><p class='text-capitalize'>cname</p></th>" .
-                        "<th><p class='text-capitalize'>cplate</p></th>" .
-                        "<th><p class='text-capitalize'>ctimecheckin</p></th>" .
-                        "<th><p class='text-capitalize'>ctimecheckout</p></th>" .
-                        "<th><p class='text-capitalize'>cparkarena</p></th>" .
-                        "<th><p class='text-capitalize'>cparklocation</p></th>" .
-                        "<th><p class='text-capitalize'>cstatus</p></th>" .
-                        "</tr>" .
-                        "</thead>";
+        <table class="table table-responsive">
+            <?php
+            if (mysqli_num_rows($result) > 0) {
+                echo "<thead>" .
+                    "<tr>" .
+                    "<th><p class='text-capitalize'>id</p></th>" .
+                    "<th><p class='text-capitalize'>cid</p></th>" .
+                    "<th><p class='text-capitalize'>cname</p></th>" .
+                    "<th><p class='text-capitalize'>cplate</p></th>" .
+                    "<th><p class='text-capitalize'>ctimecheckin</p></th>" .
+                    "<th><p class='text-capitalize'>ctimecheckout</p></th>" .
+                    "<th><p class='text-capitalize'>cparkarena</p></th>" .
+                    "<th><p class='text-capitalize'>cparklocation</p></th>" .
+                    "<th><p class='text-capitalize'>cstatus</p></th>" .
+                    "</tr>" .
+                    "</thead>";
 
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        //?Handle: Check Status Parking Begin
+                while ($row = mysqli_fetch_assoc($result)) {
+                    //?Handle: Check Status Parking Begin
 
-                        $status = "";
-                        $class = "";
-                        switch ($row["cStatus"]) {
-                            case "0":
-                                $status = "Available";
-                                $class = "badge badge-success";
-                                break;
-                            case "1":
-                                $status = "Processing";
-                                $class = "badge badge-danger";
-                                break;
-                            case "2":
-                                $status = "Booked";
-                                $class = "badge badge-warning";
-                                break;
-                        }
+                    $status = "";
+                    $class = "";
+                    switch ($row["cStatus"]) {
+                        case "0":
+                            $status = "Available";
+                            $class = "badge badge-success";
+                            break;
+                        case "1":
+                            $status = "Processing";
+                            $class = "badge badge-danger";
+                            break;
+                        case "2":
+                            $status = "Booked";
+                            $class = "badge badge-warning";
+                            break;
+                    }
 
-                        //?Handle:  Check Status Parking End
-                        echo '
+                    //?Handle:  Check Status Parking End
+                    echo '
         <tbody>
             <tr>
                 <td>' . $row["id"] . '</td>
@@ -85,12 +85,12 @@
                 <td><span class="' . $class . '">' . $status . '</span></td> 
             </tr>
         </tbody>';
-                    }
-                } else {
-                    echo "No results found.";
                 }
-                ?>
-            </table>
+            } else {
+                echo "No results found.";
+            }
+            ?>
+        </table>
     </div>
     <?php
     mysqli_close($conn);
