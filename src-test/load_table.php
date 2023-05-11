@@ -6,11 +6,6 @@ if (isset($_POST['opStatus'])  && isset($_POST['opEntries']) && isset($_POST['op
     $opStatus = $_POST['opStatus']; // giá trị trạng thái của status
     $opEntries = $_POST['opEntries']; // Giá trị mặc định cho showEntries là 10
     $opParkingArena = $_POST['opParkingArena']; // giá trị trạng thái của parking arena
-    echo 'hi';
-    echo $opStatus;
-    echo $opParkingArena;
-    echo 'ha';
-    if ($opStatus == 0) {
         $sql = "SELECT main_table.*, status_code.description, parking_arena.parkLocation
         FROM main_table 
         LEFT JOIN status_code ON main_table.cStatus = status_code.sId 
@@ -20,24 +15,14 @@ if (isset($_POST['opStatus'])  && isset($_POST['opEntries']) && isset($_POST['op
             GROUP BY idParkArena
         ) parking_arena ON parking_arena.idParkArena = main_table.cParkArena
         WHERE main_table.cStatus = status_code.sId 
+        AND IF($opParkingArena = 0, true, main_table.cParkArena = $opParkingArena)
+        AND (
+            CASE WHEN $opStatus = 0 THEN true 
+            ELSE main_table.cStatus = $opStatus END
+        )
         ORDER BY main_table.id ASC 
-        LIMIT 10;";
-    } else {
-        echo 'x=>' . $opStatus;
-        echo 'y=>' . $opParkingArena;
-        $sql = "SELECT main_table.*, status_code.description, parking_arena.parkLocation
-        FROM main_table 
-        LEFT JOIN status_code ON main_table.cStatus = status_code.sId 
-        LEFT JOIN (
-            SELECT idParkArena, MAX(parkLocation) AS parkLocation
-            FROM parking_arena
-            GROUP BY idParkArena
-        ) parking_arena ON parking_arena.idParkArena = main_table.cParkArena
-        WHERE main_table.cStatus = $opStatus
-        AND IF($opParkingArena = 0, true, parking_arena.idParkArena = $opParkingArena )
-        ORDER BY main_table.id ASC 
-        LIMIT $opEntries;";
-    }
+        LIMIT $opEntries";
+        
 }
 $result = mysqli_query($conn, $sql);
 if (!$result) {
