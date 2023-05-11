@@ -2,43 +2,103 @@
 <html>
 
 <head>
-    <title>Chuyển đổi giữa hai trang PHP</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("#btn1").click(function() {
-                $("#content").load("main-1.php");
-            });
-
-            $("#btn2").click(function() {
-                $("#content").load("main-2.php");
-            });
-        });
-    </script>
+    <title>Ajax Select Option</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-            <input type="radio" name="options" id="btn1" autocomplete="off" checked> Chuyển đến trang main-1.php
+    <h2>Select an option:</h2>
+    <select id="opStatus">
+    </select>
+    <select id="opEntries">
+    </select>
+    <select id="opParkingArena">
+    </select>
 
-        </label>
-        <label class="btn btn-secondary">
-            <input type="radio" name="options" id="btn2" autocomplete="off"> Chuyển đến trang main-2.php
-        </label>
-    </div>
-    <div id="content"></div>
+    <br><br>
+    <div id="result"></div>
+    <script>
+        $(document).ready(function() {
+
+            //load option status
+            loadStatus();
+
+            function loadStatus() {
+                $.ajax({
+                    type: "POST",
+                    url: "load_option_status.php",
+                    success: function(opStatus) {
+                        $("#opStatus").html(opStatus);
+                    }
+                });
+            }
+
+            loadEntries();
+
+            function loadEntries() {
+                $.ajax({
+                    type: "POST",
+                    url: "value_show_entries.php",
+                    success: function(opEntries) {
+                        $("#opEntries").html(opEntries);
+                    }
+                });
+            }
+
+            loadParkingArena();
+
+            function loadParkingArena() {
+                $.ajax({
+                    type: "POST",
+                    url: "load_option_parking_arena.php",
+                    success: function(opParkingArena) {
+                        $("#opParkingArena").html(opParkingArena);
+                    }
+                });
+            }
+
+            //!Handle action select option all
+
+            $("#opStatus, #opEntries, #opParkingArena").change(function() {
+                var opStatus = $("#opStatus").val();
+                var opEntries = $("#opEntries").val();
+                var opParkingArena = $("#opParkingArena").val();
+
+                if (opStatus === '') {
+                    loadTable();
+                } else {
+                    loadTable(opStatus, opEntries, opParkingArena);
+                }
+            });
+
+            // load table 
+            loadTable();
+
+            function loadTable(opStatus = 0, opEntries = 10, opParkingArena  = 0 ) {
+                console.log(` ${opStatus} - ${opEntries} - ${opParkingArena}`)
+                $.ajax({
+                    type: "POST",
+                    url: "load_table.php",
+                    data: {
+                        opStatus: opStatus,
+                        opEntries: opEntries,
+                        opParkingArena: opParkingArena ,
+                    },
+                    success: function(result) {
+                        $("#result").html(result);
+                    }
+                });
+            }
 
 
 
 
-</body>
 
+            //load show entries
+
+
+        });
+    </script>
 </body>
 
 </html>

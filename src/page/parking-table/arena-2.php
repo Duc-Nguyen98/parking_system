@@ -1,34 +1,90 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Main-2</title>
-</head>
-
 <body>
-    <h1>Đây là trang Main-2</h1>
-    <p>Nội dung của trang Main-2.</p>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-            </tr>
-        </tbody>
-    </table>
+<h1>Đây là trang Main-1</h1>
+    <p>Nội dung của trang Main-1.</p>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">
+                    Some quick example text to build on the card title
+                    and make up the bulk of the card's content.
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
 
 </body>
 
