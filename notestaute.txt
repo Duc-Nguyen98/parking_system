@@ -1,0 +1,5 @@
+các trạng thái 
+available: trống
+Processing: đã có người đỗ
+booked:  đã có người đặt lịch
+maint: bảo trì 

@@ -1,6 +1,6 @@
 <?php
-include_once "../src/utils/db_connection.php";
-include_once "../src/utils/parking_functions.php";
+include_once "db_connection.php";
+include_once "../utilsView/parking_functions.php";
 $sql = "SELECT DISTINCT idParkArena FROM parking_arena ORDER BY idParkArena ASC;";
 
 $result = mysqli_query($conn, $sql);
@@ -10,7 +10,7 @@ if (!$result) {
 
 // Tạo bảng HTML
 if (mysqli_num_rows($result) > 0) {
-    echo '<option value="0">All</option>';
+    echo '<option value="0" >All</option>';
     while ($row = mysqli_fetch_assoc($result)) {
         $parkArenaInfo = getParkArenaStatus($row["idParkArena"]);
         $rParkArena = $parkArenaInfo["idParkArena"];

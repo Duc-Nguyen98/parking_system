@@ -30,3 +30,11 @@ function getStatusInfo($statusCode)
             return array("status" => "", "classStatus" => "");
     }
 }
+
+
+function separateDateAndTime($datetimeString) {
+    $timestamp = strtotime($datetimeString);
+    $date = date('Y-m-d', $timestamp);
+    $time = date('H:i:s', $timestamp);
+    return ['date' => $date, 'time' => $time];
+}

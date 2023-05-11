@@ -19,14 +19,12 @@
     <div id="result"></div>
     <script>
         $(document).ready(function() {
-
-            //load option status
             loadStatus();
 
             function loadStatus() {
                 $.ajax({
                     type: "POST",
-                    url: "load_option_status.php",
+                    url: "./utilsController/load_option_status.php",
                     success: function(opStatus) {
                         $("#opStatus").html(opStatus);
                     }
@@ -38,7 +36,7 @@
             function loadEntries() {
                 $.ajax({
                     type: "POST",
-                    url: "value_show_entries.php",
+                    url: "./utilsView/value_show_entries.php",
                     success: function(opEntries) {
                         $("#opEntries").html(opEntries);
                     }
@@ -50,7 +48,7 @@
             function loadParkingArena() {
                 $.ajax({
                     type: "POST",
-                    url: "load_option_parking_arena.php",
+                    url: "./utilsController/load_option_parking_arena.php",
                     success: function(opParkingArena) {
                         $("#opParkingArena").html(opParkingArena);
                     }
@@ -74,30 +72,27 @@
             // load table 
             loadTable();
 
-            function loadTable(opStatus = 0, opEntries = 10, opParkingArena  = 0 ) {
+
+            function loadTable(opStatus = 0, opEntries = 10, opParkingArena = 0) {
                 console.log(` ${opStatus} - ${opEntries} - ${opParkingArena}`)
                 $.ajax({
                     type: "POST",
-                    url: "load_table.php",
+                    url: "./utilsController/load_table.php",
                     data: {
                         opStatus: opStatus,
                         opEntries: opEntries,
-                        opParkingArena: opParkingArena ,
+                        opParkingArena: opParkingArena,
                     },
                     success: function(result) {
                         $("#result").html(result);
                     }
                 });
             }
-
-
-
-
-
             //load show entries
 
-
+            
         });
+        
     </script>
 </body>
 

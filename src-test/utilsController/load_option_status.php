@@ -1,5 +1,5 @@
 <?php
-include_once "../src/utils/db_connection.php";
+include_once "db_connection.php";
 $sql = "SELECT * FROM `status_code` WHERE 1";
 $result = mysqli_query($conn, $sql);
 if (!$result) {
@@ -17,3 +17,5 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($conn);
+
+?>
