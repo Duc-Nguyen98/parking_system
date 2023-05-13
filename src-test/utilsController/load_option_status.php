@@ -8,12 +8,12 @@ if (!$result) {
 
 // Tạo bảng HTML
 if (mysqli_num_rows($result) > 0) {
-    echo '<option value="0">All</option>';
+    echo '<option value="0">Tất cả</option>';
     while ($row = mysqli_fetch_assoc($result)) {
-        echo ' <option value="' . $row["sId"] . '">' .  $row["description"] . '</option>';
+        echo ' <option class="text-capitalize" value="' . $row["sId"] . '">' .  $row["description"] . '</option>';
     }
 } else {
-    echo "<tr><td colspan='4'>No data found</td></tr>";
+    echo "<tr><td colspan='4'>Không tìm thấy dữ liệu nào</td></tr>";
 }
 
 mysqli_close($conn);

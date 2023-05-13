@@ -113,7 +113,7 @@
                                 $idNumber++;
                                 //! Variable getParkArenaStatus
                                 $parkArenaInfo = getParkArenaStatus($row["cParkArena"]);
-                                $rParkArena = $parkArenaInfo["parkArena"];
+                                $rParkArena = $parkArenaInfo["idParkArena"];
                                 $rClassArena = $parkArenaInfo["classArena"];
                                 //!  Variable getStatusInfo
                                 $statusInfo = getStatusInfo($row["cStatus"]);
