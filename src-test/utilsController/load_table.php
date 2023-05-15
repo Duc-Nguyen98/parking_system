@@ -35,11 +35,12 @@ if (!$result) {
 // Tạo bảng HTML`
 
 if (mysqli_num_rows($result) > 0) {
-    echo ' <table class="table table-condensed table-hover table-striped"> ';
+    echo ' <table class="table table-condensed table-hover table-striped" >';
 
 ?>
     <thead>
-        <tr class="text-uppercase font-weight-bolder">
+        <tr class="table table-condensed table-hover table-striped">
+            <th></th>
             <th>#</th>
             <th>Biển số</th>
             <th>Ngày vào</th>
@@ -63,9 +64,12 @@ if (mysqli_num_rows($result) > 0) {
             $rClassStatus = $statusInfo["classStatus"];
         ?>
             <!-- <?= "<div>Query: " . $sql . "</div>"; ?> -->
-            <tr data-toggle="collapse" data-target="#collapseTbl<?= $idNumber ?>" class="accordion-toggle table-light">
+            <tr>
+                <td>
+                    <button data-toggle="collapse" data-target="#collapseTbl<?= $idNumber ?>" class="btn btn-outline-secondary toggleButton"><i class="bi bi-plus"></i></button>
+
+                </td>
                 <td><span class="badge badge-pill badge-light"><?= $idNumber ?></span></td>
-                <!-- <td class="text-uppercase font-weight-normal"><?= $row["cName"] ?></td> -->
                 <td class="text-uppercase"><span class="badge badge-secondary"><?= $row["cPlate"] ?></span></td>
                 <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckIn"])['date'] ?></span></td>
                 <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckOut"])['date'] ?></span></td>
@@ -75,45 +79,36 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input switch-data-cMaintenance" id="<?= $row["id"] ?>" data-id="<?= $row["id"] ?>" <?= ($row["cStatus"] == 4) ? 'checked' : '' ?> onclick="updateMaintenance(<?= $row["id"] ?>, <?= $row["cStatus"] ?>);">
                 </div>
-     
-                <!-- <td><?= separateDateAndTime($row["cTimeCheckIn"])['date'] ?></td>
-            <td><?= separateDateAndTime($row["cTimeCheckIn"])['time'] ?></td> -->
+                -->
+
             </tr>
             <tr>
                 <td colspan="12" class="hiddenRow">
                     <div class="accordian-body collapse" id="collapseTbl<?= $idNumber ?>">
                         <table class="table table-striped">
                             <thead>
-                                <tr class="table table-condensed table-hover table-striped">
-                                    <!-- <th colspan="2">s</th> -->
+                                <tr class="table table-condensed table-hover table-striped ">
                                     <th>Tên khách hàng</th>
                                     <th>Giờ vào</th>
                                     <th>Giờ ra</th>
                                     <th>Mô tả khu vực</th>
-                                    <th>Bảo trì khu vực đỗ xe</th>
+                                    <th>Nâng Cấp | Bảo trì</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-
-                                <tr data-toggle="collapse" class="accordion-toggle" data-target="#collapseTbl<?= $idNumber ?>">
+                                <tr>
                                     <!-- <td colspan="2"></td> -->
                                     <td class="text-uppercase font-weight-normal"><span class="badge badge-secondary"><?= $row["cName"] ?></span></td>
                                     <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckIn"])['time'] ?></span></td>
                                     <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckOut"])['time'] ?></span></td>
                                     <td><span class="text-capitalize badge badge-light"><?= $row["description"] ?></span></td>
                                     <td>
-                                        <div class="custom-control custom-switch dislabel">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                            <label class="custom-control-label" for="customSwitch1">Đang được bảo trì</label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input switch-data-cMaintenance" id="<?= $row["id"] ?>" data-id="<?= $row["id"] ?>" <?= ($row["cStatus"] == 4) ? 'checked' : '' ?> onclick="updateMaintenance(<?= $row["id"] ?>, <?= $row["cStatus"] ?>);">
+                                            <label class="custom-control-label" for="customSwitch1"><span class="text-capitalize badge badge-light">Đang được bảo trì</span></label>
                                         </div>
                                     </td>
-
-                                    <!-- <td>
-                                        <a href="#" class="btn btn-default btn-sm">
-                                            <i class="glyphicon glyphicon-cog"></i>
-                                        </a>
-                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>
@@ -131,8 +126,27 @@ if (mysqli_num_rows($result) > 0) {
     mysqli_close($conn);
     ?>
     <script>
+        // <i class="bi bi-plus"></i>
+        function toggleButton() {
+            $('.toggleButton').click(function() {
+                var button = $(this);
+                var icon = $(this).find('i');
+                if (icon.hasClass('bi-plus')) {
+                    icon.removeClass('bi-plus').addClass('bi bi-dash ');
+                    button.addClass('active');
+                } else {
+                    icon.removeClass('bi bi-dash').addClass('bi-plus');
+                    button.removeClass('active');
+                }
+            });
+        }
+
+        toggleButton();
+
+
+
         function updateMaintenance(id, isChecked) {
-            console.log(id, isChecked)
+            // console.log(id, isChecked)
             $.ajax({
                 type: "POST",
                 url: "./utilsAction/update_maintenance.php",

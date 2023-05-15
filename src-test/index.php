@@ -3,8 +3,8 @@
 
 <head>
     <title>Ajax Select Option</title>
+    <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-    <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'> -->
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://kit.fontawesome.com/4ecb329ca8.js" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="hero-anime">
@@ -51,23 +52,32 @@
         </div>
     </div>
     <div class="my-4 py-5"></div>
-    <div class="container">
+    <div class="container my-4">
         <div class="row">
-            <div class="col-4">
-                <select class="custom-select text-capitalize" id="opStatus">
-                </select>
-            </div>
-            <div class="col-4">
-                <select class="custom-select" id="opEntries">
-                </select>
-            </div>
-            <div class="col-4">
-                <select class="custom-select text-capitalize" id="opParkingArena">
-                </select>
+            <div class="col-12">
+                <form class="d-flex justify-content-between text-capitalize">
+                    <div class="form-check px-0" >
+                        <label for="opStatus" class="pr-3">Trạng thái đỗ xe</label>
+                        <select class="custom-select text-capitalize" id="opStatus">
+                        </select>
+                    </div>
+                    <div class="form-check px-0">
+                        <label for="opParkingArena" class="pr-3">Khu vực đậu xe</label>
+                        <select class="custom-select text-capitalize" id="opParkingArena">
+                        </select>
+                    </div>
+                    <div class="form-check px-0">
+                        <label for="opEntries" class="pr-3">Số lượng hiển thị</label>
+                        <select class="custom-select" id="opEntries">
+                        </select>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    </div>
+
+
+
     <div class="container">
         <div class="col-md-12 p-0">
             <div class="panel panel-default">
@@ -88,7 +98,6 @@
     <script>
         $(document).ready(function() {
             loadStatus();
-
             function loadStatus() {
                 $.ajax({
                     type: "POST",
@@ -142,7 +151,7 @@
 
 
             function loadTable(opStatus = 0, opEntries = 5, opParkingArena = 0) {
-                console.log(` ${opStatus} - ${opEntries} - ${opParkingArena}`)
+                // console.log(` ${opStatus} - ${opEntries} - ${opParkingArena}`)
                 $.ajax({
                     type: "POST",
                     url: "./utilsController/load_table.php",

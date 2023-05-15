@@ -377,11 +377,11 @@ body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 table.table.table-condensed.table-hover.table-striped,
-select.custom-select {
+select.custom-select,
+label.custom-control-label {
     cursor: pointer;
 }
 
-tr.text-uppercase.font-weight-bolder,
 tr.table.table-condensed.table-hover.table-striped {
     background: #2E3192;
     color: #ffff;

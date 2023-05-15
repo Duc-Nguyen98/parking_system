@@ -38,7 +38,7 @@ body {
 }
 
 .start-header.scroll-on .navbar-brand img {
-    height: 28px;
+    height: 45px;
     -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
@@ -172,7 +172,7 @@ body {
 }
 
 .full-height {
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .over-hide {
@@ -370,6 +370,21 @@ body.dark .navbar-light .navbar-toggler-icon:before {
 
 body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     border-color: transparent;
+}
+
+.hiddenRow {
+    padding: 0 !important;
+}
+
+table.table.table-condensed.table-hover.table-striped,
+select.custom-select,
+label.custom-control-label {
+    cursor: pointer;
+}
+
+tr.table.table-condensed.table-hover.table-striped {
+    background: #2E3192;
+    color: #ffff;
 }
 
 @media (max-width: 767px) {
