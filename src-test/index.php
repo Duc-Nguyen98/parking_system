@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-12">
                 <form class="d-flex justify-content-between text-capitalize">
-                    <div class="form-check px-0" >
+                    <div class="form-check px-0">
                         <label for="opStatus" class="pr-3">Trạng thái đỗ xe</label>
                         <select class="custom-select text-capitalize" id="opStatus">
                         </select>
@@ -98,6 +98,7 @@
     <script>
         $(document).ready(function() {
             loadStatus();
+
             function loadStatus() {
                 $.ajax({
                     type: "POST",
@@ -139,7 +140,7 @@
                 var opEntries = $("#opEntries").val();
                 var opParkingArena = $("#opParkingArena").val();
 
-                if (opStatus === '') {
+                if (opStatus == '') {
                     loadTable();
                 } else {
                     loadTable(opStatus, opEntries, opParkingArena);
@@ -148,7 +149,6 @@
 
             // load table 
             loadTable();
-
 
             function loadTable(opStatus = 0, opEntries = 5, opParkingArena = 0) {
                 // console.log(` ${opStatus} - ${opEntries} - ${opParkingArena}`)
@@ -167,11 +167,10 @@
             }
             //load show entries
 
+           
 
         });
     </script>
-
-
 
 </body>
 

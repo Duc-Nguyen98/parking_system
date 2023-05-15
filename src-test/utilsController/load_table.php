@@ -60,7 +60,7 @@ if (mysqli_num_rows($result) > 0) {
             $rClassArena = $parkArenaInfo["classArena"];
             //!  Variable getStatusInfo
             $statusInfo = getStatusInfo($row["cStatus"]);
-            $rStatus = $statusInfo["status"];
+            // $rStatus = $statusInfo["status"];
             $rClassStatus = $statusInfo["classStatus"];
         ?>
             <!-- <?= "<div>Query: " . $sql . "</div>"; ?> -->
@@ -69,18 +69,12 @@ if (mysqli_num_rows($result) > 0) {
                     <button data-toggle="collapse" data-target="#collapseTbl<?= $idNumber ?>" class="btn btn-outline-secondary toggleButton"><i class="bi bi-plus"></i></button>
 
                 </td>
-                <td><span class="badge badge-pill badge-light"><?= $idNumber ?></span></td>
+                <td><span class="badge badge-pill  <?= ($row["cStatus"] == 4) ? 'badge-danger' : 'badge-success' ?>"><?= $idNumber ?></span></td>
                 <td class="text-uppercase"><span class="badge badge-secondary"><?= $row["cPlate"] ?></span></td>
                 <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckIn"])['date'] ?></span></td>
                 <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckOut"])['date'] ?></span></td>
                 <td class="text-capitalize"><span class=" <?= $rClassArena ?>"><?= $rParkArena . '-p' . $row["parkLocation"] ?></span></td>
-                <td><span class="<?= $rClassStatus ?>"><?= $rStatus ?></span></td>
-                <!-- <td>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input switch-data-cMaintenance" id="<?= $row["id"] ?>" data-id="<?= $row["id"] ?>" <?= ($row["cStatus"] == 4) ? 'checked' : '' ?> onclick="updateMaintenance(<?= $row["id"] ?>, <?= $row["cStatus"] ?>);">
-                </div>
-                -->
-
+                <td><span class="status-cell <?= $rClassStatus ?>"><?= $row["cStatus"] ?></span></td>
             </tr>
             <tr>
                 <td colspan="12" class="hiddenRow">
@@ -104,7 +98,7 @@ if (mysqli_num_rows($result) > 0) {
                                     <td><span class="text-capitalize badge badge-light"><?= separateDateAndTime($row["cTimeCheckOut"])['time'] ?></span></td>
                                     <td><span class="text-capitalize badge badge-light"><?= $row["description"] ?></span></td>
                                     <td>
-                                        <div class="custom-control custom-switch">
+                                        <div class="custom-control custom-switch read-only">
                                             <input type="checkbox" class="custom-control-input switch-data-cMaintenance" id="<?= $row["id"] ?>" data-id="<?= $row["id"] ?>" <?= ($row["cStatus"] == 4) ? 'checked' : '' ?> onclick="updateMaintenance(<?= $row["id"] ?>, <?= $row["cStatus"] ?>);">
                                             <label class="custom-control-label" for="customSwitch1"><span class="text-capitalize badge badge-light">Đang được bảo trì</span></label>
                                         </div>
@@ -126,7 +120,6 @@ if (mysqli_num_rows($result) > 0) {
     mysqli_close($conn);
     ?>
     <script>
-        // <i class="bi bi-plus"></i>
         function toggleButton() {
             $('.toggleButton').click(function() {
                 var button = $(this);
@@ -142,7 +135,6 @@ if (mysqli_num_rows($result) > 0) {
         }
 
         toggleButton();
-
 
 
         function updateMaintenance(id, isChecked) {

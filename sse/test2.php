@@ -10,8 +10,6 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
             </tr>
         </thead>
         <tbody>
@@ -21,29 +19,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         if (typeof(EventSource) !== "undefined") {
-            // var source = new EventSource("sse.php");
             var source = new EventSource("sse.php");
             source.addEventListener("message", function(event) {
                 var data = JSON.parse(event.data);
                 console.log(data);
                 data.forEach(function(row) {
-                    var $tr = $("#table tr[data-id='" + row.id + "']");
+                    var $tr = $("#table tr[data-id='" + row.sId + "']");
                     if ($tr.length > 0) {
                         // Nếu bản ghi đã tồn tại, chỉ cập nhật nội dung của dòng đó
                         var html = "";
-                        html += "<td>" + row.id + "</td>";
-                        html += "<td>" + row.cName + "</td>";
-                        html += "<td>" + row.cStatus + "</td>";
-                        html += "<td>" + row.cPlate + "</td>";
+                        html += "<td>" + row.sId + "</td>";
+                        html += "<td>" + row.description + "</td>";
+                    
                         $tr.html(html);
                     } else {
                         // Nếu bản ghi chưa tồn tại, thêm dòng mới vào bảng
                         var html = "";
-                        html += "<tr data-id='" + row.id + "'>";
+                        html += "<tr data-id='" + row.sId + "'>";
                         html += "<td>" + row.id + "</td>";
-                        html += "<td>" + row.cName + "</td>";
-                        html += "<td>" + row.cStatus + "</td>";
-                        html += "<td>" + row.cPlate + "</td>";
+                        html += "<td>" + row.description + "</td>";
+               
                         html += "</tr>";
                         $("#table tbody").append(html);
                     }

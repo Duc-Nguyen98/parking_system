@@ -23,11 +23,11 @@ function getStatusInfo($statusCode)
         case 1:
             return array("status" => "Chỗ Trống", "classStatus" => "badge badge-success");
         case 2:
-            return array("status" => "Đang sử dụng", "classStatus" => "badge badge-danger");
+            return array("status" => "Đang sử dụng", "classStatus" => "badge badge-warning");
         case 3:
             return array("status" => "Đã đặt lịch", "classStatus" => "badge badge-warning");
         default:
-            return array("status" => "Đang bảo trì", "classStatus" => "badge badge-dark");
+            return array("status" => "Đang bảo trì", "classStatus" => "badge badge-danger");
     }
 }
 
