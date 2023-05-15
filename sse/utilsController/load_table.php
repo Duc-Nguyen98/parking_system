@@ -3,24 +3,22 @@ header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 
 $conn = mysqli_connect("localhost", "root", "", "main_parking");
-// check value load_option_status and query
-// if (
-//     isset($_GET["opStatus"]) &&
-//     isset($_GET["opEntries"]) &&
-//     isset($_GET["opParkingArena"])
-// ) {
-$opStatus = $_GET["opStatus"]; // giá trị trạng thái của status
-$opEntries = $_GET["opEntries"]; // Giá trị mặc định cho showEntries là 10
-$opParkingArena = $_GET["opParkingArena"]; // giá trị trạng thái của parking arena
+
+$opStatus = 0; // giá trị trạng thái của status
+$opEntries = 5; // Giá trị mặc định cho showEntries là 10
+$opParkingArena = 0; // giá trị trạng thái của parking arena
 $sql = "SELECT main_table.*, status_code.description AS sttDescription, parking_arena.*
 FROM main_table 
 LEFT JOIN status_code ON main_table.cStatus = status_code.sId 
 LEFT JOIN parking_arena ON main_table.id = parking_arena.id
-WHERE main_table.cStatus = $opStatus 
+WHERE main_table.cStatus = status_code.sId 
+AND IF(0 = 0, true, main_table.cParkArena = 0)
+AND (
+    CASE WHEN 0 = 0 THEN true 
+    ELSE main_table.cStatus = 0 END
+)
 ORDER BY main_table.id ASC 
-LIMIT $opEntries";
-
-echo $sql;
+LIMIT 5";
 
 $result = mysqli_query($conn, $sql);
 
